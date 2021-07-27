@@ -3,6 +3,7 @@
 
 :root{
     --primary-col: rgb(228, 228, 228);
+    --left-pad: 15em;
 }
 
 body{
@@ -11,40 +12,109 @@ body{
 }
 
 .navbar{
-    background-color: var(--primary-col);
+    padding-left: var(--left-pad);
+    background-color: black;
     display: flex;
     align-items: center;
+    
+    
+
+    
     a{
         text-decoration: none;
+        color: white;
     }
+
+    .navbar-logo{
+        font-weight: bold;
+        font-size: 1.2em;
+    }
+
+
     ul{
         display: flex;
         list-style-type: none;
+        li{
+            padding-left: 2em;
+        }
+        .active a{
+            font-weight: bold;
+            color:rgb(197, 58, 7);
+            background-color: whitesmoke;
+            padding: 1em;
+        }
+    }
+    .request-edit{
+        margin-left: 2em;
+        padding:0.2em;
+        border-radius: 0.3em;
+        background-color:#C53A07;
     }
 }
 
 
 .quick-links{
+    // display: none;
     width: 10em;
+    height: 100vh;
     position:absolute;
-    left: 2em;
-    background-color: antiquewhite;
+    padding-left: 1em;
+    // left: 2em;
+    // top: 5em;
+    background-color: rgb(201, 201, 201);
+
+    a{
+        text-decoration: none;
+        color: black;
+    }
 
     .container{
-        padding: none;
+        // background-color: whitesmoke;
     }
     .primary-links{
 
     }
     ul{
-        margin: none;
-        padding: none;
+        // background-color: yellow;
+        padding: 0.4em;
         list-style-type:none; 
+        li{
+            // background-color: yellowgreen;
+            margin:0;
+            padding-bottom: 1em;
+        }
+    }
+
+    .active{
+        // background-color: #c53a07;
+        // display: flex;
+        // flex-direction: row;
+        // justify-content: center;
+        // align-items: center;
+        // text-align: center;
+        a{
+            color: #c53a07;
+            font-weight: bold;
+            font-size: 1.2em;
+           text-align: center;
+            // padding: 0.5em;
+        }
+    }
+    a:hover{
+        color: white;
+    }
+    
+    .break{
+        width:6em;
+        height: 0.1em;
+        background-color: rgb(94, 94, 94);
+        margin-left: 0.3em;
     }
 }
 
 
 
 .body{
-    width: 10em;
+    margin-left: var(--left-pad);
+    width: 50em;
 }

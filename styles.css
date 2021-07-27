@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap");
 :root {
   --primary-col: rgb(228, 228, 228);
+  --left-pad: 15em;
 }
 
 body {
@@ -9,7 +10,8 @@ body {
 }
 
 .navbar {
-  background-color: var(--primary-col);
+  padding-left: var(--left-pad);
+  background-color: black;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -20,6 +22,12 @@ body {
 
 .navbar a {
   text-decoration: none;
+  color: white;
+}
+
+.navbar .navbar-logo {
+  font-weight: bold;
+  font-size: 1.2em;
 }
 
 .navbar ul {
@@ -29,24 +37,67 @@ body {
   list-style-type: none;
 }
 
-.quick-links {
-  width: 10em;
-  position: absolute;
-  left: 2em;
-  background-color: antiquewhite;
+.navbar ul li {
+  padding-left: 2em;
 }
 
-.quick-links .container {
-  padding: none;
+.navbar ul .active a {
+  font-weight: bold;
+  color: #c53a07;
+  background-color: whitesmoke;
+  padding: 1em;
+}
+
+.navbar .request-edit {
+  margin-left: 2em;
+  padding: 0.2em;
+  border-radius: 0.3em;
+  background-color: #C53A07;
+}
+
+.quick-links {
+  width: 10em;
+  height: 100vh;
+  position: absolute;
+  padding-left: 1em;
+  background-color: #c9c9c9;
+}
+
+.quick-links a {
+  text-decoration: none;
+  color: black;
 }
 
 .quick-links ul {
-  margin: none;
-  padding: none;
+  padding: 0.4em;
   list-style-type: none;
 }
 
+.quick-links ul li {
+  margin: 0;
+  padding-bottom: 1em;
+}
+
+.quick-links .active a {
+  color: #c53a07;
+  font-weight: bold;
+  font-size: 1.2em;
+  text-align: center;
+}
+
+.quick-links a:hover {
+  color: white;
+}
+
+.quick-links .break {
+  width: 6em;
+  height: 0.1em;
+  background-color: #5e5e5e;
+  margin-left: 0.3em;
+}
+
 .body {
-  width: 10em;
+  margin-left: var(--left-pad);
+  width: 50em;
 }
 /*# sourceMappingURL=styles.css.map */
