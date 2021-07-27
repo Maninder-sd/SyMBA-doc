@@ -8,7 +8,10 @@
 
 body{
     margin: 0;
+    min-height: 100%;
+    position: relative;
     font-family: 'Open Sans', sans-serif;
+    background-color: rgb(226, 226, 226);
 }
 
 .navbar{
@@ -56,8 +59,10 @@ body{
 .quick-links{
     // display: none;
     width: 10em;
-    height: 100vh;
+    height: 100%;
+    min-height: 100vh;
     position:absolute;
+    // float: left;
     padding-left: 1em;
     // left: 2em;
     // top: 5em;
@@ -68,12 +73,6 @@ body{
         color: black;
     }
 
-    .container{
-        // background-color: whitesmoke;
-    }
-    .primary-links{
-
-    }
     ul{
         // background-color: yellow;
         padding: 0.4em;
@@ -103,7 +102,7 @@ body{
     a:hover{
         color: white;
     }
-    
+
     .break{
         width:6em;
         height: 0.1em;
@@ -117,4 +116,17 @@ body{
 .body{
     margin-left: var(--left-pad);
     width: 50em;
+    // height: 100vh;
+    // background-color: aqua;
+
+    .sunnyvale{
+        width: 100%;
+        // height: 50em;
+        background-color: red;
+        // overflow:;
+    }
+    iframe{
+        color: blueviolet;
+        background-color: brown;
+    }
 }

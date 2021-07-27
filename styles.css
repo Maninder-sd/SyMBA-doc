@@ -6,7 +6,10 @@
 
 body {
   margin: 0;
+  min-height: 100%;
+  position: relative;
   font-family: 'Open Sans', sans-serif;
+  background-color: #e2e2e2;
 }
 
 .navbar {
@@ -57,7 +60,8 @@ body {
 
 .quick-links {
   width: 10em;
-  height: 100vh;
+  height: 100%;
+  min-height: 100vh;
   position: absolute;
   padding-left: 1em;
   background-color: #c9c9c9;
@@ -99,5 +103,15 @@ body {
 .body {
   margin-left: var(--left-pad);
   width: 50em;
+}
+
+.body .sunnyvale {
+  width: 100%;
+  background-color: red;
+}
+
+.body iframe {
+  color: blueviolet;
+  background-color: brown;
 }
 /*# sourceMappingURL=styles.css.map */

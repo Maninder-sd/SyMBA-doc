@@ -1,61 +1,108 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
-    <title>SyMBA Documentation!</title>
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Symba JSwiftP Documentation</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="./styles.css">
+  <title>SyMBA Documentation!</title>
+</head>
+
+<body>
+
+  <nav class="navbar">
+    <a class="navbar-logo" href="./index.html">Symba JSwiftP Documentation</a>
+
+    <!-- this the menu button, later -->
+    <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
-        </button>
-      
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="./index.html">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Getting Started</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">SunnyVale</a>
-              </li>
+        </button> -->
 
-          </ul>
-        </div>
-      </nav>
+    <div class="nav-content" id="navbarSupportedContent">
+      <ul class="">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Github</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" target="_blank" href="https://wiki.cita.utoronto.ca/index.php/Sunnyvale">Sunnyvale</a>
+        </li>
+      </ul>
+    </div>
+    <div class="request-edit">
+      <a class="nav-link" target="_blank" href="https://wiki.cita.utoronto.ca/index.php/Sunnyvale">Request Edit</a>
+    </div>
+  </nav>
 
 
-
-
-
+  <div class="quick-links">
     <div class="container">
-        <div class="jumbotron text-center">
-            <h1>Getting Started</h1>
-          </div>
+      <ul class="primary-links">
+        <li  ><a href="./index.html">
+            Introduction
+          </a></li>
+        <li class="active"><a href="./getting-started.html"">
+            Getting Started
+          </a></li>
+        <li><a href="./running-sunnyvale.html">
+            Running Code on Sunnyvale
+          </a></li>
+        <li><a href="./in-progress.html">
+            Glossary
+          </a></li>
+        <li><a href="./in-progress.html">
+            Quick Tips
+          </a></li>
+      </ul>
 
-        <h1>Download</h1>
-        <p>
-            The zip file for Swift can be downloaded onto your machine from (link). Once downloaded, it would be preferred to transfer the files onto Sunnyvale. The steps to do just that:
-        </p>
-        <ol>
-            <li>Connect to Sunnyvale using the vpn (see wiki page)</li>
-            <li>Run Secure Copy command</li>
-        </uo>
+      <div class="break"></div>
+
+      <ul class="secondary-links">
+        <li><a href="./in-progress.html">
+            Input/Output files
+          </a></li>
+        <li><a href="./in-progress.html">
+            topic1
+          </a></li>
+        <li><a href="./in-progress.html">
+            Topic2
+          </a></li>
+        <li><a href="./in-progress.html"">
+            Topic3
+          </a></li>
+        <li><a href="./in-progress.html">
+            Topic4
+          </a></li>
+      </ul>
 
     </div>
 
-    
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </div >
 
-  </body>
+  <div class="body">
+
+
+    <iframe id="iframe" class="sunnyvale" 
+    src="./doc-htmls/getting-started/gettingstarted.html" 
+    onload="resizeIframe()"
+    frameborder="0"></iframe>
+
+  </div>
+
+</body>
+
+<script type="text/javascript">
+  function resizeIframe() {
+      const iframe = document.getElementById('iframe')
+      iframe.height = iframe.contentWindow.document.body.scrollHeight + 50 + "px";
+  }
+
+  // (windows).on("resize", resizeIframe)
+  window.addEventListener('resize', resizeIframe);
+
+</script> 
+
 </html>
