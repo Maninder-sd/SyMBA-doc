@@ -1,0 +1,52 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap");
+:root {
+  --primary-col: rgb(228, 228, 228);
+}
+
+body {
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.navbar {
+  background-color: var(--primary-col);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.navbar a {
+  text-decoration: none;
+}
+
+.navbar ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  list-style-type: none;
+}
+
+.quick-links {
+  width: 10em;
+  position: absolute;
+  left: 2em;
+  background-color: antiquewhite;
+}
+
+.quick-links .container {
+  padding: none;
+}
+
+.quick-links ul {
+  margin: none;
+  padding: none;
+  list-style-type: none;
+}
+
+.body {
+  width: 10em;
+}
+/*# sourceMappingURL=styles.css.map */

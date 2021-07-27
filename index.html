@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> -->
+
+    <link rel="stylesheet" href="./styles.css">
+
+    
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+
+    <title>SyMBA Documentation!</title>
+  </head>
+
+  <body>
+
+    <nav class="navbar">
+        <a class="navbar-logo" href="./index.html">Symba JSwiftP Documentation</a>
+
+        <!-- this the menu button, later -->
+        <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button> -->
+      
+        <div class="nav-content" id="navbarSupportedContent">
+          <ul class="">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Github</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" target="_blank" href="https://wiki.cita.utoronto.ca/index.php/Sunnyvale" >Sunnyvale</a>
+              </li>
+          </ul>
+        </div>
+        <div class="request-edit">
+          <a class="nav-link" target="_blank" href="https://wiki.cita.utoronto.ca/index.php/Sunnyvale" >Request Edit</a>
+        </div>
+    </nav>
+
+
+<div class="quick-links">
+  <div class="container">
+    <ul class="primary-links">
+      <li><a href="#">
+        Introduction
+      </a></li>
+      <li><a href="#">
+        Getting Started
+      </a></li>
+      <li><a href="#">
+        Running Code on Sunnyvale
+      </a></li>
+      <li><a href="#">
+        Glossary
+      </a></li>
+      <li><a href="#">
+        Quick Tips
+      </a></li>
+    </ul>
+    
+    <div class="break"></div>
+
+    <ul class="secondary-links"> 
+      <li><a href="#">
+        Input/Output files
+      </a></li>
+      <li><a href="#">
+        topic1
+      </a></li>
+      <li><a href="#">
+        Topic2
+      </a></li>
+      <li><a href="#">
+        Topic3
+      </a></li>
+      <li><a href="#">
+        Topic4
+      </a></li>
+    </ul>
+
+  </div>
+
+
+</div class="body">
+    <div class="container">
+        <div class="jumbotron text-center">
+            <h1>Introduction</h1>
+          </div>
+
+       <p>
+        Many physical systems, such as heat transfer, can be modeled using a system of ordinary/partial differential equations. Gravitational interactions between n-bodies can also be described as a system of differential equations, and because of the form of the equations, this system belongs to a class called Hamiltonian Systems. In general, there is no good way to solve differential equations, but numerical integration methods for solving Hamiltonian Systems have been developed, called Symplectic integrators. The SWIFT subroutine package implements Symplectic integrators that can simulate gravitationally interacting n-bodies together with test particles which do not affect other test particles or the massive bodies but still feel the gravitational influence of the massive bodies.
+        This is a version of openmp parallel SyMBA that implements imperfect accretion during collisions between N-body particles. The imperfect accretion routine is based on Leinhardt & Stewart (2012). While this version of Swift includes 4 other integration techniques (maybe more), SyMBA will be the focus of this documentation. Some of the highlights in its development include:
+        
+       </p>
+
+       <ul>
+           <li>This N-body code began as Swift created by Hal Levison and Martin Duncan with a number of different integration routines. (1998, aj, 116, 2067)</li>
+        <li>They updated it as a generally symplectic integrator that can handle close encounters between massive bodies and re-named it SyMBA.</li>
+        <li>Then Dave Minton parallelized SyMBA using openmp.</li>
+        <li>Then Seth Jacobson and Alessandro Morbidelli modified the code so that collisions are no longer assumed to be perfect mergers.</li>
+        
+        
+       </ul>
+    </div>
+
+    
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+  </body>
+</html>
