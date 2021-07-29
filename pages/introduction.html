@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  <title>SyMBA Documentation!</title>
+</head>
+
+<body>
+
+  <!-- Loads the nav bars -->
+  <div id="nav-stuff-placeholder"> </div>
+
+
+  <div class="body">
+    <!-- loads the main content from doc-html folder -->
+    <!-- you can add your own content here as well -->
+    <iframe id="iframe" class="sunnyvale" src="/doc-htmls/Introduction.html" onload="resizeIframe()"
+      frameborder="0"></iframe>
+  </div>
+
+</body>
+
+<!-- This part for resizing iframe and loading nav bars -->
+<script type="text/javascript">
+  function resizeIframe() {
+    const iframe = document.getElementById('iframe')
+    iframe.height = iframe.contentWindow.document.body.scrollHeight + 50 + "px";
+  }
+  // (windows).on("resize", resizeIframe)
+  window.addEventListener('resize', resizeIframe);
+
+  // This loads the nav stuff for each page
+  $.get("/navStuff.html", function (data) {
+    $("#nav-stuff-placeholder").replaceWith(data);
+  });
+
+</script>
+
+</html>
