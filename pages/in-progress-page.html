@@ -17,27 +17,19 @@
   <!-- Loads the page content -->
   <div id="page-content-placeholder"> </div>
 
-
-  <!-- <div class="body"> -->
-    <!-- loads the main content from doc-html folder -->
-    <!-- you can add your own content here as well -->
-    <!-- <iframe id="iframe" class="sunnyvale" src="/doc-htmls/Introduction.html" onload="resizeIframe()" -->
-      <!-- frameborder="0"></iframe> -->
-  <!-- </div> -->
-
 </body>
 
 <!-- This part for resizing iframe and loading nav bars -->
 <script type="text/javascript">
   // function resizeIframe() {
-  //   const iframe = document.getElementById('iframe')
-  //   iframe.height = iframe.contentWindow.document.body.scrollHeight + 50 + "px";
+  //     const iframe = document.getElementById('iframe')
+  //     iframe.height = iframe.contentWindow.document.body.scrollHeight + 50 + "px";
   // }
-  // // (windows).on("resize", resizeIframe)
+  // (windows).on("resize", resizeIframe)
   // window.addEventListener('resize', resizeIframe);
 
   // This loads the nav stuff for each page
-  $.get("/navStuff.html", function (data) {
+  $.get("/navStuff.html", function(data){
     $("#nav-stuff-placeholder").replaceWith(data);
   });
 
@@ -46,6 +38,6 @@
     $("#page-content-placeholder").replaceWith(data);
   });
 
-</script>
+</script> 
 
 </html>
