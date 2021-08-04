@@ -1,0 +1,54 @@
+<div class="body">
+    <h1 class="b">Running Code on Sunnyvale</h1>
+    In the previous section, we compiled and ran the jSwiftP package on the Sunnyvale login node, bubbles. This node is not meant to run extensive computations, only for development, debugging, and submitting batch jobs to the core nodes. In this section, we will develop a bash script (.sh file) that contains the commands to submit a job using qsub. For more details on submitting a job, refer the <a href="https://wiki.cita.utoronto.ca/index.php/Sunnyvale#Submitting_Jobs ">website.</a>
+    <br> <br>
+    Here is a sample script:
+    <br> <br>
+
+
+    <div class="name">test-bash.sh</div>
+    <div class="file"> 
+#!/bin/bash -l
+#PBS -l nodes=1:ppn=8,walltime=05:10:00
+#PBS -N maninder-test-sim
+#PBS -m abe
+#PBS -q workq
+#PBS -M email@address.ca
+
+
+cd $PBS_O_WORKDIR
+
+
+module purge
+module load maui torque
+module load gcc/6.3.0
+
+/home/username/jswiftP/imperfect/jswift2_symba7_imperfect_fix2_time < /home/username/jswiftP/example/ed-20M_main.in >> output.log
+    </div>
+<br>
+We submit batch jobs to a queue using the PBS system, which requires the .sh to have a special header indicating resources and what queue to load the job into.
+<br> <br>
+The job for SyMBA is serial, so we use the workq. It is a general purpose queue which can use any available node. This queue is explicitly intended for single-core (serial) or single-node general purpose jobs. This queue allows a maximum of 1 node. The upper limit on the number of processes per nodes is ppn=8. We use #PBS -q workq to indicate the queue type. Other queue types include hpq, sandyq and greenq.
+
+<ul>
+    <li> Name your job using #PBS -N job_name</li>
+    <li> Email notifications using #PBS -M email@address.ca</li>
+    <li>Change walltime=05:10:00 according to your code (max of 48 hrs)</li>
+    <li>cd $PDB_O_WORKDIR sets current directory as the job directory</li>
+    <li>maui torque are modules needed for scheduling, gcc is the compiler</li>
+</ul>
+* Jobs are scheduled automatically and preference is given to those with smaller wall-time. 
+<br>
+For more details on the PBS system, refer to <a href="https://latisresearch.umn.edu/creating-a-PBS-script">website</a>  
+<br><br>
+Once the .sh is prepared, submit the job on Sunnyvale:
+<div class="cmd">$ qsub test-bash.sh</div>
+<br>
+To monitor your jobs, use  $ showq . After a job has finished PBS will create an output file and an error file. These files are named job_name.o$PBS_JOBID and job_name.e$PBS_JOBID. You should also receive an email upon submission and completion of the job.
+<br> <br>
+<span class="b"> You are now ready to run your own simulations using the Swift subroutine package.</span>
+
+
+
+
+  </div>
