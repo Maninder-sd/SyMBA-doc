@@ -12,7 +12,7 @@ body {
 }
 
 .navbar {
-  padding-left: var(--left-pad);
+  padding-left: 1em;
   background-color: black;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -101,7 +101,38 @@ body {
 
 .body {
   margin-left: var(--left-pad);
+  font-family: 'Open Sans', sans-serif;
   width: 50em;
+  text-align: justify;
+}
+
+.body .b {
+  font-weight: bold;
+}
+
+.body .i {
+  font-style: italic;
+}
+
+.body .cmd {
+  font-family: 'Consolas';
+  background-color: aquamarine;
+  padding: 1em;
+}
+
+.body .file {
+  font-family: 'Courier';
+  background-color: #cfcfcf;
+  padding: 1em;
+}
+
+.body .file .name {
+  background-color: black;
+  width: 5em;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  float: right;
 }
 
 .body .sunnyvale {

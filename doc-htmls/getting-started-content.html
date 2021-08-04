@@ -1,0 +1,48 @@
+<div class="body">
+    <h1 class="b">Getting Started</h1>
+
+
+    <h2>Download</h2> 
+The zip file for Swift can be downloaded onto your machine from (link). Once downloaded, it would be preferred to transfer the files onto Sunnyvale. The steps to do just that: <br> <br>
+<ol>
+    <li>Connect to Sunnyvale using the vpn 
+        <a href="https://wiki.cita.utoronto.ca/index.php/Sunnyvale">(see here)</a> 
+    </li>
+
+    <li>Run Secure Copy command</li>
+    <div class="cmd">
+        $ scp  ./jSwiftP.tar.gz username@bubbles.cita.utoronto.ca:/home/<span class="b i">username</span> 
+    </div>
+    [cmd description: scp src dest]
+    <li>Log into Sunnyvale, navigate to file, and unzip using:</li>
+    <div class="cmd">
+        $ tar xvf jSwiftP.tar.gz
+    </div>
+
+
+<h2>Compile</h2>
+In order to run your first n-body simulation, we must prepare input files that include initial conditions and some input parameters. But before we can run a simulation using SWIFT, we must compile the individual Fortran files. Fortunately, this task is automated by the @make and @makeall files located in the top jSwiftP directory. 
+Edit the @make file to set the top directory of jSwiftP (SWIFT_DIR) :
+
+<div class="file">
+    <div class="name">@make</div>
+
+... 
+<br>Set SWIFT_DIR=/home/username/jSwiftP 
+<br>... 
+</div>
+
+
+</ol>
+
+
+
+
+
+
+      
+
+
+
+
+</div>

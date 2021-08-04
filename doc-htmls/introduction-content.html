@@ -1,0 +1,19 @@
+<div class="body">
+    <h1 class="b">Introduction</h1>
+
+Many physical systems, such as heat transfer, can be modeled using a system of ordinary/partial differential equations. Gravitational interactions between n-bodies can also be described as a system of differential equations, and because of how they look, this system belongs to a class called <span class="b">Hamiltonian Systems</span> . In general, there is no good way to solve differential equations, but numerical integration methods for solving Hamiltonian Systems have been developed, called <span class="b">Symplectic integrators</span> . The SWIFT subroutine package implements Symplectic integrators that can simulate gravitationally interacting n-bodies together with test particles which do not affect other test particles or the massive bodies but still feel the gravitational influence of the massive bodies. <br> <br>
+This is a version of openmp parallel SyMBA that implements imperfect accretion during collisions between N-body particles. The imperfect accretion routine is based on Leinhardt & Stewart (2012). While this version of Swift includes 4 other integration techniques, SyMBA will be the focus of this documentation. Some of the highlights in its development include: <br> <br>
+<ul>
+    <li>This N-body code began as Swift created by Hal Levison and Martin Duncan with a number of different integration routines. (1998, aj, 116, 2067)</li>
+    <li>
+        They updated it as a generally symplectic integrator that can handle close encounters between massive bodies and re-named it SyMBA
+    </li>
+    <li>
+        Then Dave Minton parallelized SyMBA using openmp.
+    </li>
+    <li>
+        Then Seth Jacobson and Alessandro Morbidelli modified the code so that collisions are no longer assumed to be perfect mergers.
+    </li>
+</ul>
+
+</div>
