@@ -1,47 +1,216 @@
 <div class="body">
     <h1 class="b">Getting Started</h1>
 
+    <ul id="CONTENTS">
+        <li> <a href="#DOWNLOAD">Download</a></li>
+        <li> <a href="#COMPILE">Compile</a></li>
+        <li> <a href="#INPUT">Input files</a>
+            <ul>
+                <li> <a href="#GLOSSARY">Glossary</a></li>
+                <li> <a href="#UNITS">Units</a></li>
+                <li> <a href="#MAIN">File 1: main.in</a></li>
+                <li> <a href="#PARAM">File 2: param.in</a></li>
+                <li> <a href="#PL">File 3: pl.in</a></li>
+            </ul>
 
-    <h2>Download</h2> 
-The zip file for Swift can be downloaded onto your machine from (link). Once downloaded, it would be preferred to transfer the files onto Sunnyvale. The steps to do just that: <br> <br>
-<ol>
-    <li>Connect to Sunnyvale using the vpn 
-        <a href="https://wiki.cita.utoronto.ca/index.php/Sunnyvale">(see here)</a> 
-    </li>
-
-    <li>Run Secure Copy command</li>
-    <div class="cmd">
-        $ scp  ./jSwiftP.tar.gz username@bubbles.cita.utoronto.ca:/home/<span class="b i">username</span> 
-    </div>
-    [cmd description: scp src dest]
-    <li>Log into Sunnyvale, navigate to file, and unzip using:</li>
-    <div class="cmd">
-        $ tar xvf jSwiftP.tar.gz
-    </div>
+        </li>
+        <li><a href="#RUNNING">Running SyMBA</a></li>
+    </ul>
 
 
-<h2>Compile</h2>
-In order to run your first n-body simulation, we must prepare input files that include initial conditions and some input parameters. But before we can run a simulation using SWIFT, we must compile the individual Fortran files. Fortunately, this task is automated by the @make and @makeall files located in the top jSwiftP directory. 
-Edit the @make file to set the top directory of jSwiftP (SWIFT_DIR) :
 
-<div class="file">
+    <h2 id="DOWNLOAD">Download</h2>
+    The zip file for Swift can be downloaded onto your machine from (link). Once downloaded, it would be preferred to
+    transfer the files onto Sunnyvale. The steps to do just that:   
+    <ol>
+        <li>Connect to Sunnyvale using the vpn
+            <a href="https://wiki.cita.utoronto.ca/index.php/Sunnyvale">(see here)</a>
+        </li>
+
+        <li>Run Secure Copy command</li>
+        <div class="cmd">
+$ scp ./jSwiftP.tar.gz username@bubbles.cita.utoronto.ca:/home/<span class="b i">username</span>
+        </div>
+        <span class="ilcmd"> [cmd description: scp src dest]</span>
+        
+        <li>Log into Sunnyvale, navigate to file, and unzip using:</li>
+        <div class="cmd">
+$ tar xvf jSwiftP.tar.gz
+        </div>
+    </ol>
+
+    <div class="break"></div> <!----------------------------------- Compiling ------------------------------------>
+
+    <h2 id="COMPILE">Compile</h2>
+    In order to run your first n-body simulation, we must prepare input files that include initial conditions and
+    some input parameters. But before we can run a simulation using SWIFT, we must compile the individual Fortran
+    files. Fortunately, this task is automated by the <span class="ilcmd"> @make @makeall</span>  files located in the top jSwiftP directory.
+    <br>
+    Edit the @make file to set the top directory of jSwiftP (SWIFT_DIR) :
+    
+    <br><br>
+
     <div class="name">@make</div>
+    <div class="file">
+...
+Set SWIFT_DIR=/home/username/jSwiftP
+...        
+    </div>
+<br>
+Run the make file to compile everything:
+<div class="cmd">
+$ ./\@makeall
+</div>
+<br>
+“./” indicates current directory, “\@” is escape character for “@”. The command will compile all the subroutines in the package.  Swift will create a library called "libswift.a" which contains all the compiled code needed to make Swift work. Swift is now ready to run simulations.
 
-... 
-<br>Set SWIFT_DIR=/home/username/jSwiftP 
-<br>... 
+
+<div class="break"></div> <!----------------------------------- Input Files ------------------------------------>
+
+
+    <h1 id="INPUT">Input Files</h1>
+    In this section we will create input files for our very first simulation. Swift requires 3 input files to start running a simulation:
+    <br>
+    <ol>
+        <li>main.in - contains references to other 2 input files</li>
+        <li>param.in - simulation parameters </li>
+        <li>pl.in - initial positions of bodies</li>
+    </ol>
+    <br>
+
+    After preparing the 3 input files, we can run the simulation using:
+    <div class="cmd">
+        $ module load gcc/6.3.0 # load the compiler
+        <br>
+$ /home/maninder/jswiftP/imperfect/jswift2_symba7_imperfect_fix2_time <main.in >>output.log
+    </div>
+
+    <!----------------------------------- Glossary ------------------------------------>
+    <div class="break"></div>
+    <h2 id="GLOSSARY">Glossary</h2>
+
+    <div class="file">
+<span class="b">Embryo:</span> a body that is large enough to gravitationally interact with other bodies in addition to interacting with the star it is orbiting.
+
+<span class="b">Planetesimal:</span>a body that is too small to interact with other bodies of a similar size, and it only gravitationally interacts with the star it orbits or embryos it gets close to. (particle?)
+
+<span class="b">Debris: </span> small bodies created in collisions, typically also too small to interact with other debris particles.(particle?)
+
+<span class="b">Giant collisions:</span> a collision that occurs between two embryos. These collisions are the only ones that can have outcomes other than merging. Also known as 'imperfect' collisions
+
+<span class="b">Perihelion:</span> minimum distance from central body(star) during an orbit
+
+<span class="b">Heliocentric distance:</span>
+
+<span class="b">Unbounded:</span> a body that will leave the solar system, moving away from central body indefinitely
+    </div>
+
+
+        <!----------------------------------- Units ------------------------------------>
+        <div class="break"></div>
+    <h2 id="UNITS">Units in the code</h2>
+    <img src="/doc-htmls/assets/units.png" >
+
+
+    The code requires units in which the gravitational constant G=1. This means we get to choose the units for 2 of the 3 measurements, the 3rd gets fixed to make.
+     <br> <br>
+    If distance is 1 AU (~1.5e11 m), time is 1 year (~3.16e7 s), then mass is ~5.06e28 kg. This means 1 solar mass (~2e30 kg) is ~39.52 units of mass. 
+    
+    If distance is 1 AU (~1.5e11 m), time is 1 day (~8.64e4 s), then mass is ~6.77e33 kg. This means 1 solar mass (~2e30 kg) is ~2.96e-4 units of mass. 
+    
+    <div class="break"></div>
+        <!----------------------------------- File 1: main.in ------------------------------------>
+        <br><br><br>
+        <h2 id="MAIN"> File 1: main.in</h2>
+        The main.in will be the file given to swift as stdin(Standard input). It contains file names to the other input files. It also contains threshold_mass.
+        <br><br>
+    <div class="name">main.in</div>
+    <div class="file">
+name_param.in
+name_pl.in
+threshold_mass 
+    </div>
+    *Anything more massive than threshold_mass is embryo, anything less massive is a planetesimal
+
+        <!----------------------------------- File 2: param.in ------------------------------------>
+        <br><br><br>
+        <h2 id="PARAM"> File 2: param.in</h2>
+        This file contains all the parameters needed for SyMBA to run. It dictates events such as stop time, data dumps, threshold distances for tracking bodies etc.
+        <br>
+        <img src="/doc-htmls/assets/param.png" alt="">
+
+        <!----------------------------------- File 3: pl.in ------------------------------------>
+        <br><br><br>
+        <h2 id="PL"> File 3: pl.in</h2>
+        This input file contains initial positions and velocities for the bodies.
+<div class="name">pl.in</div>
+<div class="file">
+number_of_bodies
+...
+Mass ,hill radius, physical radius
+x, y, z
+vx, vy, vz
+...
 </div>
 
+The first line has the number of bodies (INCLUDING the Sun), then 3 lines for each body giving mass, hill radius and physical radius on the first line, heliocentric x,y,z on the next and heliocentric vx,vy,vz on the third.
+<br> <br>
+NOTE:  The x,y,z and vx,vy,vz for the Sun MUST be 0!!
 
-</ol>
+<div class="break"></div>
+<h1 id="RUNNING"> Running SyMBA</h1>
+Here are sample files to follow along with this example. You can modify these files to create your own input files. 
 
+<div class="name">first_main.in</div>
+<div class="file">
+first_param.in
+first_pl.in
+1.0E-6
+</div>
+<br>
 
+<div class="name">first_param.in</div>
+<div class="file">
+0.0 1.0E+1 1.0E-4
+1.0E-3 1.0E-3 300
+F T F F T F
+0.01E0   5.0   -1.0   0.01E0 T    
+test_output.bin
+new    
+</div>
+<br>
 
+<div class="name">first_pl.in</div>
+<div class="file">
+4           4
+3.9478419801531572E+01
+0.0000000000000000E+00  0.0000000000000000E+00  0.0000000000000000E+00
+0.0000000000000000E+00  0.0000000000000000E+00  0.0000000000000000E+00
+1.1844568262466569E-04  3.0000875934192935E-02  4.0455139242112637E-05
+1.9999979999910049E+00  5.9999979848434666E-06  6.9813171669949904E-14
+-1.3328686918001801E-05  4.4428941695708950E+00  7.7543133538921895E-08
+1.1844567997719839E-06  6.4634924405465085E-03  4.0455139242112637E-05
+1.9696134440301909E+00  3.4729670692025144E-01  3.0361471416009781E-08
+7.7150009964936039E-01 -4.3753899218157786E+00 -3.8250881801190886E-07
+1.1855381291849292E-10  2.2507498807100156E-03  4.0455139242112637E-05
+1.4982710850847134E+00 -2.6204798095275356E-01 -4.5736004107997060E-06
+2.8369943598710593E-02  1.6236865623145853E+00  2.8338678670265550E-05   
+</div>
+<br>
+The input files are set to simulate 4 bodies(1 central mass) for 300 seconds or 1.0E+1 (ten) virtual years (whichever one comes first). Collision occurs after 3.9E-02 years (14 days) into the simulation. To run the code and view a summary:
 
+<div class="cmd">
+    $ module load gcc/6.3.0 # load the compiler
+    <br>
+    $ /home/username/jswiftP/imperfect/jswift2_symba7_imperfect_fix2_time &lt main.in >>output.log
+        <br>
+    $ less output.log
+    
 
+</div>
 
-      
-
+<br><br>
+<span class="b">Congratulations!</span>  You have run your first simulation using the Swift subroutine package. In the next section, we will run the simulation on a node on the Sunnyvale computer cluster.
 
 
 
