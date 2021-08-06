@@ -1,0 +1,88 @@
+<div class="body">
+    <h1 class="b">Generating Meaningful Input file </h1>
+    In a previous section, we described the 3 input files needed to run SyMBA: main.in param.in pl.in. Although it is possible to manually create param.pl, it is easier to use a tool that can generate positions and velocities (and hill radius) for hundreds of planets automatically. 
+    <ul id="CONTENTS" ">
+        <li> <a href="#input">Input File</a></li>
+        <li> <a href="#run">How to run</a></li>
+        <li> <a href="#sample">Sample input file</a> </li>
+        <li> <a href="#Tips">Code Implementation and Tips</a> </li>
+    </ul>
+
+    Gen_new_init_ex.f generates distributed initial position and velocity for embryos and planetesimals that obey the Power Law.
+     Download <a href="/doc-htmls/assets/gen_new_init_ex.f">here</a>.
+    <br><br>
+
+    <h2 id="input">Input File</h2> <!----------------------------------- Io_dump_pl_symba.f ------------------------------------>
+    The input file must be called <span class="b">init_params_ex.in</span> 
+    <br><br>
+    <div class="name">init_params_ex.in</div>
+    <div class="file">
+totmass alp np
+a0 a2
+meane meani        
+    </div>
+<br>
+Where:
+<div class="file">
+totmass : total mass of the disk (in earth masses)
+
+alp : service density slope of the disk (usually is 1.5)
+
+np : number of planetesimals
+
+a0 : inner disk limit
+
+a2 : outer disk limit
+
+meane : average eccentricity of planetesimals
+
+meani : average inclination of the planetesimals
+</div>
+<br><br>
+
+
+<h2 id="run">How to run</h2> <!----------------------------------- How to run ------------------------------------>
+Transfer the downloaded code and prepared input file to jswiftP>tools on Sunnyvale.
+Compile.
+Then run the tool.
+
+<div class="cmd">
+    $ scp  ./Gen_new_init_ex.f username@bubbles.cita.utoronto.ca:/home/username/jswiftP/tools
+    <br>
+    $ scp ./init_params_ex.in username@bubbles.cita.utoronto.ca:/home/username/jswiftP/tools
+    <br>
+    $ gfortran -o gen_new_init_ex gen_new_init_ex.f -L../ -lswift
+    <br>
+    $ ./gen_new_init_ex
+</div>
+
+
+<h2 id="sample">Sample input</h2> <!----------------------------------- Sample ------------------------------------>
+
+<div class="name">init_param_ex.in</div>
+<div class="file">
+4.0d1 1.5 80
+0.05d0 0.5d0
+0.1d0 0.5d0    
+</div>
+<br><br>
+This sample input file creates 80 planetesimals, with a combined mass of 40 earth masses. 
+
+<div class="break"></div>
+<h2 id="tips">Code Implementation and Tips</h2> <!----------------------------------- Tips ------------------------------------>
+<ul>
+    <li>Sun is always 1 solar mass</li>
+    <li>Mass of the disk does not include the sun</li>
+    <li>Mass of disk measured in earth masses (made consistent with units afterwards)</li>
+    <li>Mass of each embryo is initially identical (totmass/real(np) )</li>
+    <li>density=2.01  : density of material is 3g/cm</li>
+    <li>Formulas to find rpl (physical radius) and rhill (hill radius)
+        <br>
+        <span class="ilcmd">rpl(i)=(3.d0*mass(i)/(4.d0*PI*density))**(1./3.)
+            <br>
+            rhill(i)=a*(mass(i)/(mass(1)*3d0))**(1./3.)</span>
+    </li>
+    <li>Initial eccentricity is less than 0.8</li>
+</ul>
+
+  </div>

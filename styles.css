@@ -137,7 +137,7 @@ body .go-to-top {
 }
 
 .body .ilcmd {
-  font-family: 'Consolas';
+  font-family: 'Courier';
   color: grey;
 }
 
@@ -160,6 +160,10 @@ body .go-to-top {
   padding: 1em;
 }
 
+.body .dense {
+  font-size: 0.8em;
+}
+
 .body .sunnyvale {
   width: 100%;
 }
@@ -169,6 +173,10 @@ body .go-to-top {
   border-radius: 1em;
   padding-top: 1em;
   padding-bottom: 1em;
+}
+
+.body #CONTENTS a {
+  text-decoration: none;
 }
 
 .body #CONTENTS a:hover {

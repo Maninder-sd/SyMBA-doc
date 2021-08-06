@@ -152,7 +152,7 @@ body{
         
     }
     .ilcmd{
-        font-family: 'Consolas';
+        font-family: 'Courier';
         color: grey;
     }
     .name{
@@ -172,6 +172,9 @@ body{
         background-color: rgb(233, 233, 233);
         padding: 1em;
     }
+    .dense{
+        font-size: 0.8em;
+    }
     .sunnyvale{
         width: 100%;
         // height: 50em;
@@ -184,6 +187,9 @@ body{
          padding-top: 1em;
          padding-bottom: 1em;
 
+         a{
+            text-decoration: none;
+         }
          a:hover{
              color:var(--primary-red);
          }
