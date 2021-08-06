@@ -4,6 +4,7 @@
     <ul id="CONTENTS">
         <li> <a href="#DOWNLOAD">Download</a></li>
         <li> <a href="#COMPILE">Compile</a></li>
+        <li><a href="#VIM">Editing files in terminal</a></li>
         <li> <a href="#INPUT">Input files</a>
             <ul>
                 <li> <a href="#GLOSSARY">Glossary</a></li>
@@ -63,6 +64,26 @@ $ ./\@makeall
 </div>
 <br>
 “./” indicates current directory, “\@” is escape character for “@”. The command will compile all the subroutines in the package.  Swift will create a library called "libswift.a" which contains all the compiled code needed to make Swift work. Swift is now ready to run simulations.
+
+<div class="break"></div> <!----------------------------------- Tips on VIM ------------------------------------>
+
+<h2 class="" id="VIM"> Editing files in terminal</h2>
+
+<div class="file">
+You can edit files in Terminal using a text editor. Following example uses VIM
+
+$ vim @make
+
+Press ‘esc’ key
+Press ‘i’ to start editing, should say “--INSERT--” at bottom. You can edit now.
+
+Press ‘esc’ to switch to command mode. Commands begin with ‘:’. Common commands:
+:q! Exit without save
+:w save
+:x exit with save
+
+</div>
+
 
 
 <div class="break"></div> <!----------------------------------- Input Files ------------------------------------>
@@ -138,6 +159,18 @@ threshold_mass
         This file contains all the parameters needed for SyMBA to run. It dictates events such as stop time, data dumps, threshold distances for tracking bodies etc.
         <br>
         <img src="../doc-htmls/assets/param.png" alt="">
+<br><br>
+        Complete details on the input file can be found <a href="../pages/io-files-page.html">here</a>. 
+        A quick summary of the parameters:
+        <ul>
+            <li>Simulation will stop on the first of tstop or compwall</li>
+            <li>dtout and dtdump are timesteps between writing data to output files</li>
+            <li>Line 3 is logical values (ignore for now). Use the values F T F F T F</li>
+            <li>Line 4 dictates when bodies are too far or close, will stop tracking them. Set any parameter to -1 if you don’t want to use it</li>
+            <li>status_flag just to tell if appending to existing output files or running new simulation</li>
+        </ul>
+
+
 
         <!----------------------------------- File 3: pl.in ------------------------------------>
         <br><br><br>
@@ -156,7 +189,10 @@ vx, vy, vz
 The first line has the number of bodies (INCLUDING the Sun), then 3 lines for each body giving mass, hill radius and physical radius on the first line, heliocentric x,y,z on the next and heliocentric vx,vy,vz on the third.
 <br> <br>
 NOTE:  The x,y,z and vx,vy,vz for the Sun MUST be 0!!
+<br><br>
+Once again, complete details on the input files can be found <a href="../pages/io-files-page.html">here</a>. 
 
+    <!----------------------------------- Running SyMBA ------------------------------------>
 <div class="break"></div>
 <h1 id="RUNNING"> Running SyMBA</h1>
 Here are sample files to follow along with this example. You can modify these files to create your own input files. 
@@ -210,7 +246,7 @@ The input files are set to simulate 4 bodies(1 central mass) for 300 seconds or 
 </div>
 
 <br><br>
-<span class="b">Congratulations!</span>  You have run your first simulation using the Swift subroutine package. In the next section, we will run the simulation on a node on the Sunnyvale computer cluster.
+<span class="b">Congratulations!</span>  You have run your first simulation using the Swift subroutine package. In the next section, we will run the simulation on a node on the <a href="../pages/running-sunnyvale-page.html">Sunnyvale computer cluster</a> .
 
 
 
