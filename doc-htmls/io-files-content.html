@@ -1,0 +1,220 @@
+<div class="body subroutines">
+    <h1 class="b">Input and Output Files </h1>
+    This section will contain all the information about the input and output files related to Swift SyMBA.
+    <ul id="CONTENTS" ">
+        <li> <a href="#input">Input Files</a>
+            <ul>
+                <li> <a href="#main">File 1: main.in</a></li>
+                <li> <a href="#param">File 2: param.in</a></li>
+                <li> <a href="#pl">File 3: pl.in</a></li>
+            </ul>
+        </li>
+        <li> <a href="#output">Output Files</a>
+            <ul>
+                <li> <a href="#">File 1: </a></li>
+                <li> <a href="#">File 2: </a></li>
+                <li> <a href="#">File 3: </a></li>
+            </ul>
+        </li>
+    </ul>
+
+
+
+    <h1 id="input"> Input Files</h1>
+    <div class="break"></div> <!----------------------------------- File 1: main.in ------------------------------------>
+    <h2 id="main"> File 1: main.in</h2>
+    The main.in will be the file given to swift as stdin(Standard input). It contains file names to the other input files. It also contains threshold_mass.
+    <br><br>
+
+    <div class="name">main.in</div>
+    <div class="file">
+name_param.in
+name_pl.in
+threshold_mass         
+    </div>
+    Anything more massive than threshold_mass is embryo, anything less massive is a planetesimal. Mass should be consistent with the units you’ve decided on (usually 1 time=1 year ,1 distance=1 AU, 1 mass=5.06e28 kg meaning 1 solar mass=39.52 mass).
+
+    <div class="break"></div> <!----------------------------------- File 2: param.in ------------------------------------>
+
+    <h2 id="param"> File 2: param.in</h2>
+    This file contains all the parameters needed for SyMBA to run. It dictates events such as stop time, data dumps, threshold distances for tracking bodies etc.
+    <br> <br>
+    <img src="/doc-htmls/assets/param.png" alt="">
+    <br><br>
+
+    <div class="name">main.in</div>
+    <div class="file">
+t0, tstop, dt
+dtout, dtdump
+L1 L2 L3 L4 L5 L6
+rmin, rmax, rmaxu, qmin, lclose
+binary_outputfile
+status_flag_for_open_statements 
+    </div>
+
+    <br><br>
+    Details:
+    <div class="file" style="font-size: 0.8em;">
+        Where
+        LINE 1
+                t0 : the initial time
+                tstop :the time to stop the integration
+                dt : the timestep
+             *the unit of time is consistent with units selected (simulation time)
+        LINE 2
+                dtout : the time interval between outputs (see below)
+                dtdump : time interval between dumps of the 3 basic files (see below)
+               Compwall : wall time for the code
+             *recommended that stout=dtdump for easy simulation resumption
+             *For a 48hr walltime (in the .sh file), give the code a maximum wall
+        time of 30 hr to give you a good buffer time
+        LINE 3
+                L1-L6 are logicals and are set to T or F
+                  L1:  .true.==> Include J2 and J4 for central body.  These values
+                                 must be included in the pl.in file.
+                  L2:  .true.==> Does the various checks for coming too close to Sun
+                                 or planet, or too far from Sun.  If particles are
+                                 removed a file called 'discard.out' will contain a
+                                 set of entries for each removed particle that gives
+                                 the time, the particle's posn and vel and istat flags
+                                 and rstat flags (see a file called README.stat for a
+                                 discription of the status flags), as well as all the
+                                 planetary posns and vels. at the time of removal.
+                                 So you will have a complete discription of the
+                                 planetary system at removal time if you need it.
+                         NOTE: IF THIS BIT IS NOT SET YOU SHOULD OMIT THE LINE
+                         IN PARAM.IN THAT CONTAINS RMIN, RMAX ETC. AND HAVE ONLY
+                         THREE LINES IN ALL :  THE LAST HAVING THE NAME OF
+                         THE BINARY OUTPUT FILE.
+                  L3:  .true.==>  Computes Jacobi integral for the tps (only useful
+                                  if have only one planet on circ. orbit).  Writes to
+                                  a file called jacobi.out
+                  L4:  .true.==> Computes energy and ang. momentum and writes out
+                                 to a file called energy.out. (of course this only
+                                 checks the accuracy of the planetary integrations).
+                  L5:  .true.==> Write to a binary output file the heliocentric
+                                 orbital elements of all bodies and test particles.
+                                 The elements are written as REAL*4. The elements are
+                                 a,e,i,OMEGA,omega and M, where OMEGA is the long. of
+                                 ascending node, omega is arg. of peri. and M is mean
+                                 anomaly. ROUTINES TO READ FROM THE BINARY FILE ARE
+                                 GIVEN IN FOR EXAMPLE THE ROUTINE "FOLLOW" IN THE
+                                 "TOOLS" DIRECTORY. TO USE FOLLOW SIMPLY RESPOND TO
+                                 THE PROMPTS (e.g. the last query is for which
+                                 particle # to follow - use a positive integer for a
+                                 tp or a negative number if you want to follow a
+                                 planet (e.g. -3 for the third massive body ie the
+                                 second planet).
+                  L6:  .true.==> Same as L5 except that Swift write an XDR file.
+                         NOTE: L5 and L6 cannot both be set to .true.
+        
+                rmin is the heliocentric distance at which a tp is stopped because
+                     it is deemed to be too close to the central body.
+                     SET TO -1. if you want to ignore this check
+                rmax is the heliocentric distance at which a tp is stopped because
+                     it is deemed to be too far from the central body
+                     SET TO -1. if you want to ignore this check
+                rmaxu is the heliocentric distance at which a tp is stopped because
+                     it is deemed to be too far from the central body AND it
+                     is also unbound with respect to the central body
+                     SET TO -1. if you want to ignore this check
+                qmin is the perihelion distance at which a tp is stopped because
+                     it is deemed to be too close to the central body.
+                     SET TO -1. if you want to ignore this check
+                 Note:  The orbital elements computed are the osculating
+                            (instantaneous) HELIOCENTRIC values. Because of the
+                            motion of the Sun induced by the planets, these values
+                            are unrepresentative of the barycentric values for
+                            particles which have semi-major axes beyond a few
+                            hundred AU.  In particular, values for the pericentric
+                            distance and the inclination will vary considerably. As
+                            a result we STRONGLY RECOMMEND that a value of RMAX of
+                            a few hundred AU be used if a nonzero value of QMIN is
+                            used.
+                lclose is a logical.  If .true. then the code will check for close
+                     approaches between tp and planets.  If tp gets within a distance
+                     rpl (physical radius of planet) of the planet then it is stopped.  rpl for each planet must
+                     be included in the pl.in if this flag is set.  NOTE: we recommend
+                     that rpl be greater than a Hill sphere if you are using WHM.
+                binary_outputfile is the name of a binary file to store the
+                    orbital elements at time intervals dtout (see below).
+                status_flag_for_open_statements is the status flag for the open
+                statements of all the output files but lyap.dat.  Must be one
+                of the following:
+                                 new      (program dies if the file exists)
+                                 append   (data is appended to the file)
+                                 unknown  (data is written over existing data).
+        
+        NOTES : 1) Every dtout time increments, the code outputs various quantities,
+                 depending on the value of the logical flags L1-L6 (read in from
+                 param.in).
+        
+                2) At time increments set by dtdump, the code dumps all of
+                the information needed to resume the integration at that time
+                in case of power failures or in case one wishes to resume an
+                integration from its endpoint. The info. is in 3 files called
+                dump_pl.dat,  dump_tp.dat, and dump_param.dat.  The format is
+                identical to pl.in, tp.in and param.in respectively.  Note
+                that t0 in dump_param.dat records the time of the dump and
+                that the status_flag_for_open_statements is changed to
+                `append', so that these files can be used to restart a stopped
+                integration.  Depending on the situation, one may wish to
+                increase tstop in order to extend an integration.   The files
+                are overwritten with each dump so only the most recent one is
+                preserved.
+        
+                NOTE: We strongly suggest that you set dtdump=dtout.  This will
+                      make it easier to restart the program if your computer
+                      goes down.
+        
+
+    </div>
+
+    <div class="break"></div> <!----------------------------------- File 3: pl.in ------------------------------------>
+    <h2 id="pl"> File 3: pl.in</h2>
+    This input file contains initial positions and velocities for the bodies.
+    <br><br>
+
+    <div class="name">pl.in</div>
+    <div class="file">
+nbod
+...
+mass ,rhill, rpl
+x, y, z
+vx, vy, vz
+...      
+    </div>
+
+<br>
+Details:
+    <div class="file" style="font-size: 0.8em;">
+LINE 1
+    nbod: number of massive bodies
+
+LINE 2
+    mass : mass of the planet
+    rhill : size of planet’s hill sphere
+    rpl: physical radius of planet
+LINE 3
+    x, y, z : initial position in Helio coord 
+LINE 4
+    vxh,vyh,vzh  :  initial position in Helio coord
+
+Lines 2-4 repeat for each planet.
+    
+NOTE:  The x,y,z and
+        vx,vy,vz for the Sun MUST be 0!!
+
+From original README.first:
+
+In addition:  if L1 = .true. then next to the Sun must be the values of J_2 * R^2 and J_4 R^4, here R is the radius of the central body.  
+
+If L2=.true. and lclose=.true. than the lines that contain the masses of the planets must also include the stopping radius.
+
+    </div>
+
+    <div class="break"></div> <!----------------------------------- Output files ------------------------------------>
+    <h1 id="output"> Output Files</h1>
+    still in progress
+
+  </div>

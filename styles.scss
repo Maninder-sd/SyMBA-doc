@@ -3,6 +3,7 @@
 
 :root{
     --primary-col: rgb(228, 228, 228);
+    --primary-red: #c53a07;
     --left-pad: 15em;
 }
 
@@ -182,6 +183,14 @@ body{
          border-radius: 1em;
          padding-top: 1em;
          padding-bottom: 1em;
+
+         a:hover{
+             color:var(--primary-red);
+         }
     }
 
+}
+
+.subroutines #CONTENTS a{
+    text-decoration: none;
 }

@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap");
 :root {
   --primary-col: rgb(228, 228, 228);
+  --primary-red: #c53a07;
   --left-pad: 15em;
 }
 
@@ -168,5 +169,13 @@ body .go-to-top {
   border-radius: 1em;
   padding-top: 1em;
   padding-bottom: 1em;
+}
+
+.body #CONTENTS a:hover {
+  color: var(--primary-red);
+}
+
+.subroutines #CONTENTS a {
+  text-decoration: none;
 }
 /*# sourceMappingURL=styles.css.map */
