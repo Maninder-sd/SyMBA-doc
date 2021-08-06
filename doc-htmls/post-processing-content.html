@@ -1,0 +1,185 @@
+<div class="body ">
+    <h1 class="b">Post Processing Code </h1>
+    The SWIFT subroutine package is used to simulate gravitationally interacting n-bodies together with test particles which do not affect other test particles or the massive bodies but still feel the gravitational influence of the massive bodies. The positional and collision data that results from SyMBA can be taken at face value, or it can be used by post processing tools to infer more data about the planetary system.
+    <br> <br>
+    This section is about a post-processing tool that determines the composition (Core Mass Fraction) of the bodies in the simulation. Planets are assigned initial CMF values, which change depending on the type of collision the planet is involved in (which is tracked by SyMBA).
+    <br><br>
+    The file can be downloaded <a href="/doc-htmls/assets/comp_symba_imperfect_nograze_final.f">here</a>.
+    <br>
+    <ul id="CONTENTS" ">
+        <li> <a href="#input">Input Files</a>
+            <ul>
+                <li><a href="#param"> param.in</a></li>
+                <li> <a href="#comp-param">Composition parameter file</a> </li>
+            </ul>
+        </li>
+        <li><a href="#run">Run code</a></li>
+        <li> <a href="#output">Output Files</a>
+            <ul>
+                <li> <a href="#pl.maxcorecompositions-nograzefa">pl.maxcorecompositions-nograzefa</a> </li>
+                <li> <a href="#follow.maxcorecollisions-nograzefa">follow.maxcorecollisions-nograzefa</a> </li>
+                <li> <a href="#debris.origin">debris.origin</a> </li>
+            </ul>
+        </li>
+        
+    </ul>
+
+
+    <div class="break"></div> <!----------------------------------- INPUT ------------------------------------>
+    <h1 id="input"> Input files</h1>
+    Needs 4 sets of input files:
+    <ol>
+        <li>Output files from SyMBA (discard_mass.out, add_debris.out, dump_param.dat, dump_pl.dat)</li>
+        <li>pl.in - the same planetesimal input file used for SyMBA</li>
+        <li>params.in - reference to other input files (different from SyMBA param.in)</li>
+        <li>Composition parameter file</li>
+    </ol>
+    We need to prepare the last 2 input files.
+    <br> <br>
+
+    <div class="break"></div>
+    <!-------------------param.in-------------------  -->
+    <div class="name" id="param">param.in</div>
+    <div class="file">
+comp-param.in
+example_pl.in
+    </div>
+where
+<br>
+comp-param.in : composition parameter file <br>
+example_pl.in : planetesimal input file
+
+
+<div class="break"></div>
+<!-------------------comp-param.in-------------------  -->
+
+<h2 id="comp-param">Composition parameter files</h2>
+This file's main purpose is to tell the code if it should use the minimum CMF prescription
+or the maximum CMF prescription. If you would like the minimum one, use 'mincore', if
+you would like the maximum, use 'maxcore'. Typically, I run these for both prescriptions
+and average out the results.
+<br><br>
+
+<div class="name" >comp-param.in </div>
+<div class="file">
+cname
+c2 c3 c4
+c5 c6 c7
+CMF_init tout
+dloss
+fdebris fdiscard    
+</div>
+where
+<div class="file dense">
+    cname : type of prescription (‘mincore’ or ‘maxcore’)
+    c2, c3, c4, c5, c6, c7 : parameters  (‘mincore’ or ‘maxcore’)
+    CMF_init : the CMF that you want to give all your initial bodies.
+    tout : time interval between outputting composition 
+    dloss : logical value, ‘True' if the simulation included debris-loss, and 'False' if it did not.
+    fdebris : SyMBA output file name containing debris info (add_debris.out) 
+    fdiscard : SyMBA output file name containing discarded mass info (discard_mass.out) 
+</div>
+<br>
+
+* Its recommended that tout=dtout from SyMBA input file “param.in”
+
+<br><br>
+Here are the 2 composition files you will be using:
+<br><br>
+
+<!-------------- cmax-param.in ------------------------>
+<div class="name" >cmax-param.in </div>
+<div class="file">
+maxcore
+maxcore maxcore maxcore
+maxcore maxcore maxcore
+0.333 1E2
+False
+add_debris.out discard_mass.out    
+</div>
+<br><br>
+<!-------------- cmin-param.in ------------------------>
+<div class="name" >cmin-param.in </div>
+<div class="file">
+mincore
+mincore mincore mincore
+mincore mincore mincore
+0.333 1E2
+False
+add_debris.out discard_mass.out    
+</div>
+<br>
+*Remember to change the name in the param.in file accordingly.
+<br><br>
+
+<div class="break"></div>
+<!-------------------Run code-------------------  -->
+
+<h2 id="run">Run Code</h2>
+
+<div class="cmd">
+    $ ./comp_symba_imperfect_nograze_final &lt; params.in
+</div>
+
+<div class="break"></div>
+<!-------------------Output files-------------------  -->
+<h2 id="output">Output Files</h2>
+The code produces some output files. 
+<br>
+
+
+<!-------------------pl.maxcorecompositions-nograzefa-------------------  -->
+<h2 id="pl.maxcorecompositions-nograzefa">pl.maxcorecompositions-nograzefa</h2>
+<div class="file dense">
+    Columns:
+
+    time, iinit, a, e, inc, mass, id, mcore, mmant, mtot
+    
+    where
+    iinit = the 'permanent id' of the planet
+    id = the id of the planet at that timestep
+    mcore = mass of iron core
+    mmant = mass of silicate mantle
+    mtot = sum of the previous two
+    mass = mass of planet, a way to check that the composition info adds up correctly
+
+</div>
+
+
+<!-------------------pl.maxcorecollisions-nograzefa-------------------  -->
+<h2 id="follow.maxcorecollisions-nograzefa">follow.maxcorecollisions-nograzefa</h2>
+<div class="file dense">
+    Columns:
+
+    time, a, targ_id, targ_iinit, targ_mass, targ_CMF, proj_id, proj_iinit, proj_mass,
+    proj_CMF, coll_type, iLR, LRMass, LRCMF, iSLR, SLRMass, SLRCMF, num_deb,
+    deb_id, deb_mass
+    
+    targ = target body in the collision
+    proj = projectile body in the collision
+    as above, id = id of body at time of collision, iinit = permanent id of body
+    LR = largest remnant after collision
+    SLR = second largest remnant after collision (if it exists)
+    num_deb = number of debris particles created
+    deb_id = id of first debris particle
+    deb_mass = mass of an individual debris particle. All debris particles created in this
+    collision will have that same mass.    
+    
+</div>
+
+
+<!-------------------debris.origin-------------------  -->
+<h2 id="debris.origin">debris.origin</h2>
+<div class="file dense">
+    Columns:
+
+    time debris_id planet_id 
+    
+
+    where:
+    the above tells you the time of debris creation, and the planet that the debris came from
+</div>
+
+
+
+  </div>
