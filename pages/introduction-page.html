@@ -4,9 +4,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="../styles.css">
   <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-  <link rel="icon" href="/doc-htmls/assets/icon.png">
+  <link rel="icon" href="../doc-htmls/assets/icon.png">
   <title>SyMBA Documentation!</title>
 </head>
 
@@ -38,12 +38,12 @@
   // window.addEventListener('resize', resizeIframe);
 
   // This loads the nav stuff for each page
-  $.get("/navStuff.html", function (data) {
+  $.get("../navStuff.html", function (data) {
     $("#nav-stuff-placeholder").replaceWith(data);
   });
 
     // This loads the content for each page
-    $.get("/SyMBA-doc/doc-htmls/introduction-content.html", function (data) {
+    $.get("../doc-htmls/introduction-content.html", function (data) {
     $("#page-content-placeholder").replaceWith(data);
   });
 
